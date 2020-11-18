@@ -8,19 +8,79 @@
 </head>
 
 <body>
+
+  <style>
+    * {
+      font-family: system-ui;
+    }
+
+    body {
+      margin: 0;
+      background-color: #ffe1e1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #counter {
+      min-width: 48px;
+      text-align: center;
+      font-size: 96px;
+      line-height: 1;
+      margin: 0;
+    }
+
+    div {
+      display: grid;
+      grid-template-columns: min-content min-content min-content;
+      column-gap: 48px;
+      align-items: center;
+    }
+
+    button {
+      font-weight: 500;
+      font-size: 24px;
+      background-color: rgb(97, 29, 68);
+      outline: none;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      box-shadow: 0px 5px 20px 0px rgba(97, 29, 68, 0.5);
+      transition: all 0.1s ease-in-out;
+      cursor: pointer;
+    }
+
+    button:active {
+      box-shadow: 0px 0px 10px 0px rgba(97, 29, 68, 0.4);
+    }
+  </style>
+
+
+  <div>
+    <button id="remove">-</button>
+    <h1 id="counter"></h1>
+    <button id="add">+</button>
+  </div>
+
   <script>
     const createStore = (reducer, initialState) => {
       let state = initialState
-      let updater = () => { }
+      let updater = () => {}
+
       const getState = () => state
 
       const dispatch = (action) => {
         state = reducer(state, action)
         updater()
       }
+
       const subscribe = (listener) => {
         updater = listener
       }
+
       return {
         getState,
         dispatch,
@@ -28,18 +88,39 @@
       }
     }
 
-    const reducer = (state, action) => {
-      return action
+    const reducer = (state, action) => { 
+      switch(action.type){
+        case 'ADD': return state + action.payload
+        case 'REMOVE': return state - action.payload
+        default: return state
+      }
     }
-    const store = createStore(reducer, 'estado inicial de la aplicación')
-    // store.dispatch()
-    // store.getState()
-    // store.subscribe()
+
+
+    const counter = document.getElementById('counter')
+    const add = document.getElementById('add')
+    const remove = document.getElementById('remove')
+    
+    const store = createStore(reducer, 0)
+    counter.textContent= store.getState()
 
     store.subscribe(() => {
-      console.log('ha cambiado algo en el store', store.getState())
+      counter.innerText = store.getState()
     })
-    store.dispatch('voy a cambiar algo')
+
+    add.addEventListener('click', () => {
+      store.dispatch({
+        type: 'ADD',
+        payload: 1,
+      });
+    })
+
+    remove.addEventListener('click', () => {
+      store.dispatch({
+        type: 'REMOVE',
+        payload: 1,
+      });
+    })
 
   </script>
 </body>
