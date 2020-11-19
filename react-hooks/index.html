@@ -22,35 +22,40 @@
       name: 'Ash',
       lastName: 'Ketchum',
       avatar: './images/ash.jpg',
-      bio: 'Tengo 10 años y mi sueño es convertime en maestro pokemon. Actualmente viajo con Pikachu y Go.',
+      bio: 'Tengo %AGE% años y mi sueño es convertime en maestro pokemon. Actualmente viajo con Pikachu y Go.',
       city: 'Pueblo Paleta',
       social: [150, 160, 130, 255]
     }
 
     function useState(initialState) {
-      let value = initialState
-      function state() {
-        return value
+      this.value = initialState
+
+      const state = () => this.value
+
+      const setState = (value) => {
+        this.value = value
       }
-      function setState(newValue) {
-        value = newValue
-      }
+
       return [
-        state,
-        setState,
+        state, 
+        setState
       ]
     }
 
     function User({ name, lastName, avatar, city, bio: bio_, social }) {
       const [twitter, facebook, instagram, tiktok] = social
       const [age, setAge] = useState(10)
+
+    
       function render() {
-        const bio = bio_.replace('10', age)
+
+        const bio = bio_.replace('%AGE%', age)
+
         return `
           <div class="user">
             <img src="${avatar}" alt="${name}" width="140" height="140">
             <div class="details">
-              <p>${name} ${lastName}</p>
+              <p>${name} ${lastName} </p>
             </div>
             <p class="city"><em>${city}</em></p>
             <div class="social">
@@ -73,21 +78,25 @@
           </div>
         `
       }
+
       return {
         render,
-        setAge,
+        setAge
       }
+
     }
 
     const ash = User(user)
 
-    window.update.addEventListener('click', () => {
-      const newAge = window.prompt('¿Quee edad tendrá Ash?', 10)
-      ash.setAge(newAge)
-      window.user.innerHTML = ash.render()
-    })
-
     window.user.innerHTML = ash.render()
+    document.getElementById('update').addEventListener('click', function() {
+      let age = window.prompt('¿Cuál es la edad de Ash?', 10)
+      ash.setAge(age)
+      window.user.innerHTML = ash.render()
+    });
+
+
+
   </script>
 </body>
 
