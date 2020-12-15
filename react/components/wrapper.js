@@ -3,7 +3,7 @@ import { Component } from '../lib/react.js'
 class Wrapper extends Component {
   render() {
     const { children } = this.props
-    return `
+    return ` 
       <div class="wrapper">
         ${children}
       </div>
@@ -11,4 +11,4 @@ class Wrapper extends Component {
   }
 }
 
-export default Wrapper
+export default Wrapper;

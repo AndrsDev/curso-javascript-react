@@ -1,47 +1,55 @@
 import { Component, createElement } from '../lib/react/index.js'
 
 class User extends Component {
-  displayName = 'User'
+
   state = {
     age: this.props.age
   }
-  componentDidMount() {
-    console.log(`el componente ${this.displayName} se renderizó`)
+
+  /* Using normal functions 
+    constructor(props){
+      super(props)
+      this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(event) {
+      console.log(this.props.name)
+    }
+  */
+
+  componentWillMount(){
+    console.log("El componente se va a renderizar")
   }
-  componentWillMount() {
-    console.log(`el componente ${this.displayName} se va a renderizar por primera vez`)
+
+  componentDidMount(){
+    console.log("El componente se renderizó.")
   }
-  componentDidUpdate() {
-    console.log(`el componente ${this.displayName} se actualizó`)
+
+  componentDidUpdate(){
+    console.log("El componente se actualizó.")
   }
-  // constructor(props) {
-  //   super(props)
-  //   this.handleClick = this.handleClick.bind(this)
-  // }
-  // handleClick(event) {
-  //   console.log(this.props.name, event)
-  // }
+
   handleClick = (event) => {
-    console.log(this.state.age)
     this.setState({
-      age: this.state.age + 1,
+      age: this.state.age + 1
     })
   }
-  render() {
 
-    const { avatar, name } = this.props
-    const { age } = this.state
+  render() {
+    const { avatar, name } = this.props;
+    const { age } = this.state;
+
     return createElement('div', {
-      class: 'user',
+      class: "user",
       onClick: this.handleClick,
       children: [
         createElement('div', {
           class: 'avatar',
           children: createElement('img', {
-            src: avatar
+            src: avatar,
           })
         }),
-        createElement('h2', null, `Hola soy ${name} y tengo ${age} años`)
+        createElement('h2', null, `${name} ${age}`),
       ]
     })
   }

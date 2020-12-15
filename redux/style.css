@@ -1,0 +1,46 @@
+* {
+  font-family: system-ui;
+}
+
+body {
+  margin: 0;
+  background-color: #ffe1e1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#counter {
+  min-width: 48px;
+  text-align: center;
+  font-size: 96px;
+  line-height: 1;
+  margin: 0;
+}
+
+div {
+  display: grid;
+  grid-template-columns: min-content min-content min-content;
+  column-gap: 48px;
+  align-items: center;
+}
+
+button {
+  font-weight: 500;
+  font-size: 24px;
+  background-color: rgb(97, 29, 68);
+  outline: none;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  box-shadow: 0px 5px 20px 0px rgba(97, 29, 68, 0.5);
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0px 0px 10px 0px rgba(97, 29, 68, 0.4);
+}

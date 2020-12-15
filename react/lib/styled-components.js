@@ -1,30 +1,28 @@
-const styled = {
-  h1: function (styles) {
-    return function (content) {
-      return `
-        <h1 style="${styles}">
-          ${content}
-        </h1>
-      `
-    }
-  },
-  div: function (styles) {
-    return function (content) {
-      return `
-        <div style="${styles}">
-          ${content}
-        </div>
-      `
-    }
-  },
-  img: function (styles) {
-    return function (content) {
-      return `
-        <img style="${styles}" ${content} />
-      `
-    }
-  },
-}
+const styled = function() {
+  const tags = ['h1', 'h2', 'h3', 'p', 'div'];
+  let object = {}
 
+  tags.forEach(tag => {
+    object[tag] = function(styles) {
+      return function(content){
+        return`
+          <${tag} style="${styles}">
+            ${content}
+          </${tag}>
+        `
+      }
+    }
+  })
 
-export default styled
+  object['img'] = function(styles) {
+    return function(content){
+      return`
+        <img style="${styles}" ${content}"/>
+      `
+    }
+  }
+
+  return object;
+}()
+
+export default styled;

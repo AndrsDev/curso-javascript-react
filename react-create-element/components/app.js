@@ -1,44 +1,48 @@
 import { Component, createElement } from '../lib/react/index.js'
-import User from './user.js'
 import Wrapper from './wrapper.js'
-import UserStyled from './user-styled.js'
-
-
-
+import User from './user.js'
+import UserStyled from './userStyled.js'
 
 class App extends Component {
   render() {
     return createElement('div', {
       class: 'app',
-      children: new Wrapper({
-        children: [
-          new User({
-            name: 'Ash',
-            avatar: './images/ash.jpg',
-            age: 10,
-          }),
-          new UserStyled({
-            name: 'Ash',
-            avatar: './images/ash.jpg',
-            age: 10,
-          })
-        ]
-      })
-    })
+      children: [
+        new Wrapper({
+          children: [
+            new User({
+              avatar: './images/ash.jpg',
+              name: 'Ash',
+              age: 10
+            }),
+            new UserStyled({
+              avatar: './images/ash.jpg',
+              name: 'Ash',
+              age: 10
+            })
+          ]
+        })
+      ],
+    }, '')
+
+    // return `
+    //   <div class="app">
+    //     ${new Wrapper({
+    //       children: `
+    //         ${new User({
+    //           avatar: './images/ash.jpg',
+    //           name: 'Ash',
+    //         }).render()}
+
+    //         ${new UserStyled({
+    //           avatar: './images/ash.jpg',
+    //           name: 'Ash Styled',
+    //         }).render()}
+    //       `
+    //     }).render()}
+    //   </div>
+    // `
   }
 }
 
-// ${new Wrapper({
-//   children: `
-//     <h1>React.js ⭐️⭐️⭐️⭐️⭐️</h1>
-//     ${new User({
-//       name: 'Ash',
-//       avatar: './images/ash.jpg'
-//     }).render()}
-//     ${new UserStyled({
-//       name: 'Ash',
-//       avatar: './images/ash.jpg'
-//     }).render()}
-//   `
-// }).render()}
-export default App
+export default App;

@@ -11,7 +11,9 @@ $button.addEventListener('click', () => {
 
 function setRecomendedMovies(movies) {
   return movies.map((movie, index) => {
-    return { ...movie, recommended: movie.vote_average > 7 }
+    movie.recommended = movie.vote_average > 7 
+    return movie
+    // return { ...movie, recommended: movie.vote_average > 7 }
     // if (movie.vote_average > 7) {
     //   return { ...movie, recommended: true }
     // }

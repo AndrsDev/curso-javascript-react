@@ -4,71 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Redux</title>
 </head>
 
 <body>
-
-  <style>
-    * {
-      font-family: system-ui;
-    }
-
-    body {
-      margin: 0;
-      background-color: #ffe1e1;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #counter {
-      min-width: 48px;
-      text-align: center;
-      font-size: 96px;
-      line-height: 1;
-      margin: 0;
-    }
-
-    div {
-      display: grid;
-      grid-template-columns: min-content min-content min-content;
-      column-gap: 48px;
-      align-items: center;
-    }
-
-    button {
-      font-weight: 500;
-      font-size: 24px;
-      background-color: rgb(97, 29, 68);
-      outline: none;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 6px;
-      box-shadow: 0px 5px 20px 0px rgba(97, 29, 68, 0.5);
-      transition: all 0.1s ease-in-out;
-      cursor: pointer;
-    }
-
-    button:active {
-      box-shadow: 0px 0px 10px 0px rgba(97, 29, 68, 0.4);
-    }
-  </style>
-
-
   <div>
     <button id="remove">-</button>
     <h1 id="counter"></h1>
     <button id="add">+</button>
   </div>
+  <button id="unsubscribe">Unsubscribe</button>
 
   <script>
     const createStore = (reducer, initialState) => {
-      let state = initialState
-      let updater = () => {}
+      let state = initialState;
+      let listeners = []
+      
+      const updater = () => {
+        for (const listener of listeners) {
+          listener();
+        }
+      }
 
       const getState = () => state
 
@@ -78,7 +35,13 @@
       }
 
       const subscribe = (listener) => {
-        updater = listener
+        listeners.push(listener); 
+        return {
+          unsubscribe: () => {
+            const i = listeners.indexOf(listener);
+			      listeners.splice(i, 1);
+          }
+        }
       }
 
       return {
@@ -100,11 +63,12 @@
     const counter = document.getElementById('counter')
     const add = document.getElementById('add')
     const remove = document.getElementById('remove')
+    const unsubscribe = document.getElementById('unsubscribe')
     
     const store = createStore(reducer, 0)
     counter.textContent= store.getState()
 
-    store.subscribe(() => {
+    const subscription = store.subscribe(() => {
       counter.innerText = store.getState()
     })
 
@@ -121,6 +85,11 @@
         payload: 1,
       });
     })
+
+    unsubscribe.addEventListener('click', () => {
+      subscription.unsubscribe();
+    })
+
 
   </script>
 </body>

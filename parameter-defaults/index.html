@@ -25,27 +25,31 @@
 
   <script>
     const $flavors = document.querySelectorAll('.flavor')
-    // console.log($flavors)
-    $flavors.forEach($el => $el.addEventListener('click', selectFlavor))
-    function selectFlavor() {
+    function selectFlavor(){
       this.classList.toggle('is-active')
     }
+
     function isRequired(param) {
-      throw new Error(`${param} es requerido`)
+      throw new Error(`${param} es requerido.`)
     }
-    function makeIcecream(flavor1 = isRequired('flavor1'), flavor2 = isRequired('flavor2')) {
-      // console.log(flavor1)
-      alert(`tienes un rico helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor}`)
+    
+    function makeIcecream(flavor1 = isRequired('flavor1'), flavor2 = isRequired('flavor2')){
+      alert(`Helado de ${flavor1.dataset.flavor} y ${flavor2.dataset.flavor}.`)
     }
+
+    $flavors.forEach($el => $el.addEventListener('click', selectFlavor))  
+  
     window.btn.addEventListener('click', () => {
       const $flavors = document.querySelectorAll('.flavor.is-active')
-      console.log($flavors)
-      try {
+      
+      try{
         makeIcecream($flavors[0], $flavors[1])
       } catch (error) {
-        alert('Aun no completa los sabores para preparar tu helado')
+        console.error(error)
+        alert('Debes seleccionar por lo menos dos sabores.')
       }
-    })
+    });
+    
   </script>
 </body>
 

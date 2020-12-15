@@ -5,8 +5,10 @@ export function renderMovieListFromMap(list, map) {
 }
 
 function renderElement(movie) {
-  const element = buildElement(movie)
-  window.container.append(element)
+  if(movie){
+    const element = buildElement(movie)
+    window.container.append(element)
+  }
 }
 
 function buildElement({ title, poster_path, vote_average, id, recommended }) {

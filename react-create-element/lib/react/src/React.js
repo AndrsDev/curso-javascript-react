@@ -1,33 +1,32 @@
 class Component {
-  constructor(props = {}, state = {}) {
+  constructor(props = {}, state = {}){
     this.props = props
     this.state = state
   }
+
   update() {}
-  #updater(){
+
+  #updater() {
+    this.componentWillUpdate();
     this.update(this.render())
-    this.componentDidUpdate()
+    this.componentDidUpdate();
   }
-  // se llama andes que se renderice el componente
-  componentWillMount() {
 
-  }
-  componentDidMount() {
+  componentWillMount() {}
 
-  }
-  componentDidUpdate() {
+  componentDidMount() {}
 
-  }
-  setState(newState) {
+  componentDidUpdate() {}
+
+  componentWillUpdate() {}
+
+  setState(value){
     this.state = {
       ...this.state,
-      ...newState
+      ...value
     }
-    this.#updater()
-  }
-  build() {
-    this.componentWillMount()
-    return this.render()
+
+    this.#updater();
   }
 }
 

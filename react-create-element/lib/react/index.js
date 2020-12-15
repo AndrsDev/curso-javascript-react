@@ -4,5 +4,5 @@ export {
 
 export {
   createElement,
-  createElement as jsx,
+  createElement as jsx
 } from './src/ReactElement.js'

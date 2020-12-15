@@ -1,6 +1,7 @@
 const createStore = (reducer, initialState) => {
   let state = initialState
   let updater = () => { }
+  
   const getState = () => state
 
   const dispatch = (action) => {

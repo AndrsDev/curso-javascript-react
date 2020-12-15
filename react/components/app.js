@@ -1,22 +1,23 @@
 import { Component } from '../lib/react.js'
-import User from './user.js'
 import Wrapper from './wrapper.js'
-import UserStyled from './user-styled.js'
+import User from './user.js'
+import UserStyled from './userStyled.js'
 
 class App extends Component {
+  
   render() {
     return `
       <div class="app">
         ${new Wrapper({
           children: `
-            <h1>React.js ⭐️⭐️⭐️⭐️⭐️</h1>
             ${new User({
+              avatar: './images/ash.jpg',
               name: 'Ash',
-              avatar: './images/ash.jpg'
             }).render()}
+
             ${new UserStyled({
-              name: 'Ash',
-              avatar: './images/ash.jpg'
+              avatar: './images/ash.jpg',
+              name: 'Ash Styled',
             }).render()}
           `
         }).render()}
@@ -25,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
