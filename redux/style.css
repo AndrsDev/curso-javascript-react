@@ -20,6 +20,12 @@ body {
   margin: 0;
 }
 
+#unsubscribe {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
 div {
   display: grid;
   grid-template-columns: min-content min-content min-content;
