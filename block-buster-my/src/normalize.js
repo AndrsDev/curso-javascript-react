@@ -1,23 +1,23 @@
 function normalizeMovies(list) {
-  const state = {
+  const normalized = {
     map: new Map(),
     all: [], 
     popular: [], 
     notPopular: []
   }
   
-  return list.reduce((state, movie) => {
-    state.map.set(movie.id, movie)
-    state.all.push(movie.id)
+  return list.reduce((normalized, movie) => {
+    normalized.map.set(movie.id, movie)
+    normalized.all.push(movie.id)
   
     if (movie.vote_average > 7) {
-      state.popular.push(movie.id)
+      normalized.popular.push(movie.id)
     } else {
-      state.notPopular.push(movie.id)
+      normalized.notPopular.push(movie.id)
     }
   
-    return state
-  }, state)
+    return normalized
+  }, normalized)
 }
 
 
