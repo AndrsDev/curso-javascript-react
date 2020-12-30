@@ -17,14 +17,15 @@ const MovieListStyled = styled.section`
 
 class MovieList extends Component {
 
-  state = store.getState();
-
   render() {
-    const { movieList: movies, ids } = this.state;
+    const state = store.getState();
+    const movies = state.movieList;
+    const ids = state.ids[state.filter];
+    
     return Wrapper({
       children: [
         new MovieListStyled({
-          children: ids.all.map(id => new Movie(movies.get(id)))
+          children: ids.map(id => new Movie(movies.get(id)))
         })
       ]
     })
