@@ -5,7 +5,10 @@ const reducer = (state, { type, payload }) => {
     case ADD_MOVIES:
       return state
     case SET_FILTER:
-      return state
+      return {
+        ...state,
+        filter: payload,
+      }
     default:
       return state
   }

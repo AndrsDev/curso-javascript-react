@@ -17,6 +17,12 @@ const MovieListStyled = styled.section`
 
 class MovieList extends Component {
 
+  componentDidMount() {
+    store.subscribe(() => {
+      this.setState();
+    })
+  }
+
   render() {
     const state = store.getState();
     const movies = state.movieList;
